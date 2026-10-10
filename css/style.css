@@ -1,0 +1,866 @@
+/* ============================================================
+   PERSONAL DASHBOARD — style.css
+   Sections:
+   1. Reset & Base
+   2. CSS Custom Properties (Variables)
+   3. Layout — Header & Main Grid
+   4. Cards (shared)
+   5. Greeting Section
+   6. Timer Section
+   7. Todo Section
+   8. Links Section
+   9. Dark Mode Toggle
+  10. Name Modal
+  11. Buttons (general)
+  12. Responsive / Mobile
+   ============================================================ */
+
+
+/* ============================================================
+   1. RESET & BASE
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+/* ============================================================
+   2. CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================================ */
+
+:root {
+  --bg-primary:       #f0f4f8;
+  --bg-card:          #ffffff;
+  --text-primary:     #2d3748;
+  --text-secondary:   #718096;
+  --accent:           #667eea;
+  --accent-gradient:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --border:           #e2e8f0;
+  --shadow:           0 4px 6px rgba(0, 0, 0, 0.07);
+  --btn-danger:       #fc8181;
+  --success:          #48bb78;
+  --radius-card:      16px;
+  --radius-btn:       50px;
+  --transition:       0.2s ease;
+}
+
+body.dark-mode {
+  --bg-primary:     #0f0f1a;
+  --bg-card:        #1a1a2e;
+  --text-primary:   #e2e8f0;
+  --text-secondary: #a0aec0;
+  --border:         #2d3748;
+  --shadow:         0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ============================================================
+   3. LAYOUT — HEADER & MAIN GRID
+   ============================================================ */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: var(--accent-gradient);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icon {
+  font-size: 1.4rem;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+/* Greeting spans full width */
+#greeting-section {
+  grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   4. CARDS (SHARED)
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   5. GREETING SECTION
+   ============================================================ */
+
+#greeting-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.greeting-top {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#time-display {
+  font-size: 3.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+#date-display {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.greeting-bottom {
+  flex: 1;
+  text-align: right;
+}
+
+#greeting-text {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#greeting-name {
+  color: var(--accent);
+}
+
+#edit-name-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--accent);
+  background: transparent;
+  transition: background-color var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+#edit-name-btn:hover {
+  background: rgba(102, 126, 234, 0.12);
+  transform: scale(1.1);
+}
+
+#edit-name-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================
+   6. TIMER SECTION
+   ============================================================ */
+
+#timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#timer-section .section-title {
+  align-self: flex-start;
+  margin-bottom: 0;
+}
+
+#timer-display {
+  font-size: 5.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 4px;
+  transition: color var(--transition);
+  line-height: 1;
+}
+
+#timer-display.running {
+  color: var(--accent);
+  animation: timerPulse 2s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(102, 126, 234, 0.3); }
+  50%       { text-shadow: 0 0 24px rgba(102, 126, 234, 0.7); }
+}
+
+.timer-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timer-settings {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timer-settings-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.timer-custom-input {
+  width: 70px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  text-align: center;
+  transition: border-color var(--transition), background-color 0.3s;
+}
+
+.timer-custom-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+
+/* ============================================================
+   7. TODO SECTION
+   ============================================================ */
+
+#todo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#todo-section .section-title {
+  margin-bottom: 0;
+}
+
+.todo-add-row {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-add-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color var(--transition), background-color 0.3s;
+}
+
+.todo-add-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#task-error {
+  font-size: 0.8rem;
+  color: var(--btn-danger);
+  min-height: 18px;
+  display: none;
+}
+
+#task-error.visible {
+  display: block;
+}
+
+.todo-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#task-count {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+#task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#task-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+#task-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#task-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  transition: border-color var(--transition), background-color 0.3s;
+}
+
+.task-item:hover {
+  border-color: var(--accent);
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: color var(--transition);
+}
+
+.task-item.done .task-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.task-edit-input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.task-edit-input:focus {
+  outline: none;
+}
+
+.task-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.task-btn-edit {
+  color: var(--accent);
+}
+
+.task-btn-edit:hover {
+  background: rgba(102, 126, 234, 0.12);
+  transform: scale(1.1);
+}
+
+.task-btn-delete {
+  color: var(--btn-danger);
+}
+
+.task-btn-delete:hover {
+  background: rgba(252, 129, 129, 0.12);
+  transform: scale(1.1);
+}
+
+.task-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================
+   8. LINKS SECTION
+   ============================================================ */
+
+#links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#links-section .section-title {
+  margin-bottom: 0;
+}
+
+#links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.link-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+  border-color: var(--accent);
+}
+
+.link-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  color: var(--text-primary);
+}
+
+.link-favicon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.link-favicon-placeholder {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.link-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.link-delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--btn-danger);
+  color: #fff;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+  line-height: 1;
+}
+
+.link-card:hover .link-delete-btn {
+  opacity: 1;
+}
+
+.link-delete-btn:hover {
+  transform: scale(1.15);
+}
+
+.link-delete-btn:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--btn-danger);
+  outline-offset: 2px;
+}
+
+.add-link-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.add-link-form input {
+  flex: 1;
+  min-width: 100px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: border-color var(--transition), background-color 0.3s;
+}
+
+.add-link-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+
+/* ============================================================
+   9. DARK MODE TOGGLE (HEADER BUTTON)
+   ============================================================ */
+
+#dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: background-color var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+#dark-mode-toggle:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(20deg) scale(1.1);
+}
+
+#dark-mode-toggle:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+#dark-mode-toggle svg {
+  display: block;
+}
+
+
+/* ============================================================
+  10. NAME MODAL
+   ============================================================ */
+
+#name-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+#name-modal.visible {
+  display: flex;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(-20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-card h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+#modal-name-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  transition: border-color var(--transition), background-color 0.3s;
+}
+
+#modal-name-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#modal-submit-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-btn);
+  background: var(--accent-gradient);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform var(--transition), filter var(--transition);
+}
+
+#modal-submit-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+#modal-submit-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+  11. BUTTONS (GENERAL)
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform var(--transition), filter var(--transition), background-color var(--transition);
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn-accent {
+  background: var(--accent-gradient);
+  color: #ffffff;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background: var(--text-secondary);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.btn-outline:hover {
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+}
+
+
+/* ============================================================
+  12. RESPONSIVE / MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  header {
+    padding: 12px 20px;
+  }
+
+  .header-title {
+    font-size: 1rem;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 40px;
+    gap: 16px;
+  }
+
+  #greeting-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .greeting-bottom {
+    text-align: left;
+  }
+
+  #greeting-text {
+    justify-content: flex-start;
+    font-size: 1.3rem;
+  }
+
+  #time-display {
+    font-size: 2.5rem;
+  }
+
+  #timer-display {
+    font-size: 3.8rem;
+  }
+
+  .modal-card {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  #time-display {
+    font-size: 2rem;
+  }
+
+  #timer-display {
+    font-size: 3rem;
+  }
+
+  .timer-controls {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
+}

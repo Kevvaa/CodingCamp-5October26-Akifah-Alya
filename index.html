@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Name Modal Overlay -->
+  <div id="name-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal-card">
+      <h2 id="modal-heading">Welcome! What's your name?</h2>
+      <p class="modal-subtitle">Personalize your dashboard experience</p>
+      <input type="text" id="modal-name-input" placeholder="Enter your name..." maxlength="30" autocomplete="off" aria-label="Your name" />
+      <button id="modal-submit-btn" type="button">Get Started</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-brand">
+      <span class="header-icon" aria-hidden="true">✦</span>
+      <span class="header-title">Personal Dashboard</span>
+    </div>
+    <button id="dark-mode-toggle" type="button" aria-label="Toggle dark mode">
+      <!-- Icon injected by JS -->
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Greeting Card -->
+    <section id="greeting-section" class="card">
+      <div class="greeting-top">
+        <div id="time-display" aria-live="polite" aria-label="Current time"></div>
+        <div id="date-display" aria-live="polite" aria-label="Current date"></div>
+      </div>
+      <div class="greeting-bottom">
+        <p id="greeting-text">
+          <span id="greeting-phrase">Good Morning</span>,
+          <span id="greeting-name"></span>
+          <button id="edit-name-btn" type="button" aria-label="Edit your name">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+        </p>
+      </div>
+    </section>
+
+    <!-- Timer Card -->
+    <section id="timer-section" class="card">
+      <h2 class="section-title">Focus Timer</h2>
+      <div id="timer-display" aria-live="polite" aria-label="Timer display">25:00</div>
+      <div class="timer-controls">
+        <button id="timer-start-btn" type="button" class="btn btn-accent">Start</button>
+        <button id="timer-stop-btn" type="button" class="btn btn-secondary">Stop</button>
+        <button id="timer-reset-btn" type="button" class="btn btn-outline">Reset</button>
+      </div>
+      <div class="timer-settings">
+        <label for="custom-timer-input" class="timer-settings-label">Custom minutes:</label>
+        <input type="number" id="custom-timer-input" class="timer-custom-input" min="1" max="120" placeholder="25" aria-label="Set custom timer minutes" />
+        <button id="set-timer-btn" type="button" class="btn btn-sm btn-outline">Set</button>
+      </div>
+    </section>
+
+    <!-- Todo Card -->
+    <section id="todo-section" class="card">
+      <h2 class="section-title">To-Do List</h2>
+      <div class="todo-add-row">
+        <input type="text" id="task-input" placeholder="Add a new task..." maxlength="100" autocomplete="off" aria-label="New task text" />
+        <button id="add-task-btn" type="button" class="btn btn-accent" aria-label="Add task">+</button>
+      </div>
+      <div id="task-error" role="alert" aria-live="assertive"></div>
+      <div class="todo-meta">
+        <span id="task-count" aria-live="polite"></span>
+        <button id="sort-tasks-btn" type="button" class="btn btn-sm btn-outline" aria-label="Sort tasks">Sort A–Z</button>
+      </div>
+      <ul id="task-list" aria-label="Task list"></ul>
+    </section>
+
+    <!-- Quick Links Card -->
+    <section id="links-section" class="card">
+      <h2 class="section-title">Quick Links</h2>
+      <div id="links-grid" aria-label="Quick links"></div>
+      <div class="add-link-form">
+        <input type="text" id="link-label-input" placeholder="Label (e.g. Google)" maxlength="30" autocomplete="off" aria-label="Link label" />
+        <input type="url" id="link-url-input" placeholder="URL (e.g. https://...)" maxlength="200" autocomplete="off" aria-label="Link URL" />
+        <button id="add-link-btn" type="button" class="btn btn-accent">Add</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
